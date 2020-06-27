@@ -1,0 +1,8 @@
+[package]
+name = "libip6tc-sys"
+version = "0.1.0"
+authors = ["Tjeu Kayim"]
+edition = "2018"
+
+[build-dependencies]
+bindgen = "0.54.0"
