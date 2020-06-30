@@ -2,14 +2,22 @@ use std::env;
 use std::path::PathBuf;
 
 fn main() {
+    println!("cargo:rustc-rerun-if-changed=src");
+    println!("cargo:rustc-link-search=src");
+    println!("cargo:rustc-link-lib=ip6tables");
     println!("cargo:rustc-link-lib=ip6tc");
     println!("cargo:rustc-link-lib=ip4tc");
+    println!("cargo:rustc-link-lib=xtables");
 
-    println!("cargo:rerun-if-changed=wrapper.h");
+    cc::Build::new()
+        .file("src/ip6tables.c")
+        .include("src")
+        .compile("ip6tables");
 
     let bindings = bindgen::Builder::default()
-        .header("wrapper.h")
+        .header("src/wrapper.h")
         .derive_default(true)
+        .derive_debug(true)
         .blacklist_item("xt_entry_target")
         .blacklist_item("xt_entry_match")
         .parse_callbacks(Box::new(bindgen::CargoCallbacks))

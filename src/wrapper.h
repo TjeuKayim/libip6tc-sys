@@ -10,3 +10,6 @@
 #include "linux/netfilter_ipv4/ipt_ttl.h"
 #undef _IPT_TTL_H
 #include "linux/netfilter_ipv4/ipt_TTL.h"
+
+// #include "xtables.h"
+#include "ip6tables.h"
